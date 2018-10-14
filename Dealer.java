@@ -18,9 +18,6 @@ public class Dealer {
 	}
 	
 	void pas() {
-//		System.out.println(gekregenKaarten);
-//		Kaartendek.kaartendek.remove(0);
-//		System.out.println("Geschudde kaartendek: " + Kaartendek.kaartendek);
 		dealerKaarten();
 	}
 	

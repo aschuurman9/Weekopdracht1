@@ -6,7 +6,7 @@ public class BlackJack {
 	static boolean doorspelen = true;
 	Scanner scanner = new Scanner(System.in);
 	Dealer dealer = new Dealer();
-	Speler	speler = new Speler();
+	Speler speler = new Speler();
 
 	BlackJack() {
 		System.out.println("Welkom bij BlackJack \n");
@@ -15,7 +15,6 @@ public class BlackJack {
 		speler.setNaam(naam);
 		System.out.println(speler.getNaam() + " leuk dat je meespeelt! \nMaak een keuze: \n");
 	}
-
 
 	void starten() {
 		toonBeginMenu();
@@ -47,21 +46,7 @@ public class BlackJack {
 	void verwerkenInvoerBeginMenu(String deInvoer) {
 		switch (deInvoer) {
 		case "s":
-			System.out.println("spel start");
-			Kaartendeck kaartendek = new Kaartendeck();
-			kaartendek.kaartendekMaken();
-			kaartendek.kaartenSchudden();
-			System.out.println("*************************");
-			dealer.dealerPaktKaart();
-			dealer.puntenDealer = dealer.kaartenDealer.get(0).punten; 
-			System.out.println("*************************");
-			System.out.println("De eerste 2 kaarten: ");
-			dealer.geefKaart();
-			dealer.telPunten();
-			dealer.geefKaart();
-			dealer.telPunten();
-			System.out.println("Totaal aantal punten: " + dealer.totaalPunten);
-			dealer.check21();
+			nieuwSpelBegint();
 			break;
 		case "q":
 			doorspelen = false;
@@ -75,24 +60,10 @@ public class BlackJack {
 	void verwerkenInvoer(String deInvoer) {
 		switch (deInvoer) {
 		case "s":
-			dealer.totaalPunten = 0; 
+			dealer.totaalPunten = 0;
 			dealer.puntenDealer = 0;
 			dealer.kaartenDealer.clear();
-			System.out.println("spel start");
-			Kaartendeck kaartendek = new Kaartendeck();
-			kaartendek.kaartendekMaken();
-			kaartendek.kaartenSchudden();
-			System.out.println("********************");
-			dealer.dealerPaktKaart();
-			dealer.puntenDealer = dealer.kaartenDealer.get(0).punten; 
-			System.out.println("*************************");
-			System.out.println("De eerste 2 kaarten: ");
-			dealer.geefKaart();
-			dealer.totaalPunten = dealer.telPunten();
-			dealer.geefKaart();
-			dealer.totaalPunten = dealer.telPunten();
-			System.out.println("Totaal aantal punten: " + dealer.totaalPunten);
-			dealer.check21();
+			nieuwSpelBegint();
 			break;
 		case "k":
 			System.out.println("kaart");
@@ -114,6 +85,24 @@ public class BlackJack {
 		default:
 			System.out.println("Dit is geen geldige invoer. Kies opnieuw");
 		}
+	}
+
+	void nieuwSpelBegint() {
+		System.out.println("spel start");
+		Kaartendeck kaartendek = new Kaartendeck();
+		kaartendek.kaartendekMaken();
+		kaartendek.kaartenSchudden();
+		System.out.println("********************************************");
+		dealer.dealerPaktKaart();
+		dealer.puntenDealer = dealer.kaartenDealer.get(0).punten;
+		System.out.println("********************************************");
+		System.out.println("De eerste 2 kaarten: ");
+		dealer.geefKaart();
+		dealer.telPunten();
+		dealer.geefKaart();
+		dealer.telPunten();
+		System.out.println("Totaal aantal punten: " + dealer.totaalPunten);
+		dealer.check21();
 	}
 
 }
