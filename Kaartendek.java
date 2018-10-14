@@ -6,7 +6,7 @@ import java.util.Collections;
 public class Kaartendek {
 	String[] soort = {"harten", "ruiten", "schoppen", "klaver"};
 	String[] waarde = {"2", "3", "4", "5", "6","7", "8", "9", "10", "boer", "vrouw", "heer", "aas"};
-	static ArrayList<Kaart> kaartendek = new ArrayList();
+	static ArrayList<Kaart> kaartendek = new ArrayList<>();
 	Kaart kaart;
 		
 	void kaartendekMaken() {
@@ -17,7 +17,6 @@ public class Kaartendek {
 				kaartendek.add(kaart);
 			}
 		}
-		System.out.println("Kaartendek: " + kaartendek.toString());
 	}
 	
 	void kaartenSchudden() {
