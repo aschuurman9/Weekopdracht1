@@ -1,9 +1,14 @@
 package Weekopdrachten;
 
 public class Speler {
-	String naam;
-	
-	Speler(String naam){
+	private String naam;
+
+
+	void setNaam(String naam) {
 		this.naam = naam;
+	}
+
+	String getNaam() {
+		return naam;
 	}
 }

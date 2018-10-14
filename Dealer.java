@@ -3,26 +3,29 @@ package Weekopdrachten;
 import java.util.ArrayList;
 
 public class Dealer {
-	static int totaalPunten;
+	int totaalPunten;
+	int puntenDealer;
 	Kaart teGevenKaart;
 	ArrayList<Kaart> gekregenKaarten = new ArrayList<>();
+	ArrayList<Kaart> kaartenDealer = new ArrayList<>();
 		
 	Kaart geefKaart() {
-		teGevenKaart = Kaartendek.kaartendek.get(0);
+		teGevenKaart = Kaartendeck.kaartendeck.get(0);
 		gekregenKaarten.add(teGevenKaart);
-		Kaartendek.kaartendek.remove(0);
+		Kaartendeck.kaartendeck.remove(0);
 		System.out.println(teGevenKaart);
 		return teGevenKaart;
 	}
 	
 	void pas() {
-		System.out.println(gekregenKaarten);
-		Kaartendek.kaartendek.remove(0);
-		System.out.println("Geschudde kaartendek: " + Kaartendek.kaartendek);
+//		System.out.println(gekregenKaarten);
+//		Kaartendek.kaartendek.remove(0);
+//		System.out.println("Geschudde kaartendek: " + Kaartendek.kaartendek);
+		dealerKaarten();
 	}
 	
 	int telPunten() {
-		totaalPunten += teGevenKaart.puntenKaart;
+		totaalPunten += teGevenKaart.punten;
 		if(teGevenKaart.waarde.equals("aas") && totaalPunten >21) {
 			totaalPunten -= 10;
 		}
@@ -42,11 +45,39 @@ public class Dealer {
 	void aasTellen() {
 		for(int i = 0 ; i < gekregenKaarten.size()-1;i++) {
 			if (gekregenKaarten.get(i).waarde.equals("aas") && totaalPunten > 21) {
-				gekregenKaarten.get(i).puntenKaart = 1;
+				gekregenKaarten.get(i).punten = 1;
 			}
 		}
 	}
 	
+	Kaart dealerPaktKaart() {
+		teGevenKaart = Kaartendeck.kaartendeck.get(0);
+		System.out.println("Kaart van de dealer: " + teGevenKaart);
+		kaartenDealer.add(teGevenKaart);
+		Kaartendeck.kaartendeck.remove(0);
+		System.out.println("Alle kaarten van de dealer: " + kaartenDealer);
+		puntenDealer += teGevenKaart.punten;
+		System.out.println("Totaal aantal punten van de dealer: " + puntenDealer);
+		return kaartenDealer.get(0);
+	}
+	
+	void dealerKaarten(){
+		while (BlackJack.doorspelen != false) {
+		dealerPaktKaart();
+		if (puntenDealer < 17) {
+				System.out.println();
+			} else if (puntenDealer > 21 || totaalPunten > puntenDealer ) {
+				System.out.println("Gefeliciteerd! Je  hebt gewonnen.");
+				BlackJack.doorspelen = false;
+			} else if(totaalPunten == puntenDealer){
+				System.out.println("Gelijkspel");
+			}else {
+				System.out.println("Helaas je hebt verloren");
+				BlackJack.doorspelen = false;
+			}
+			
+		}
+	}
 
 
 	

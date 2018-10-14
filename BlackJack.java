@@ -6,13 +6,14 @@ public class BlackJack {
 	static boolean doorspelen = true;
 	Scanner scanner = new Scanner(System.in);
 	Dealer dealer = new Dealer();
+	Speler	speler = new Speler();
 
 	BlackJack() {
 		System.out.println("Welkom bij BlackJack \n");
 		System.out.println("Wat is je naam? ");
 		String naam = scanner.nextLine();
-		Speler	speler = new Speler(naam);
-		System.out.println(speler.naam + " leuk dat je meespeelt! \nMaak een keuze: \n");
+		speler.setNaam(naam);
+		System.out.println(speler.getNaam() + " leuk dat je meespeelt! \nMaak een keuze: \n");
 	}
 
 
@@ -47,15 +48,19 @@ public class BlackJack {
 		switch (deInvoer) {
 		case "s":
 			System.out.println("spel start");
-			Kaartendek kaartendek = new Kaartendek();
+			Kaartendeck kaartendek = new Kaartendeck();
 			kaartendek.kaartendekMaken();
 			kaartendek.kaartenSchudden();
+			System.out.println("*************************");
+			dealer.dealerPaktKaart();
+			dealer.puntenDealer = dealer.kaartenDealer.get(0).punten; 
+			System.out.println("*************************");
 			System.out.println("De eerste 2 kaarten: ");
 			dealer.geefKaart();
 			dealer.telPunten();
 			dealer.geefKaart();
 			dealer.telPunten();
-			System.out.println("Totaal aantal punten: " + Dealer.totaalPunten);
+			System.out.println("Totaal aantal punten: " + dealer.totaalPunten);
 			dealer.check21();
 			break;
 		case "q":
@@ -70,29 +75,36 @@ public class BlackJack {
 	void verwerkenInvoer(String deInvoer) {
 		switch (deInvoer) {
 		case "s":
-			Dealer.totaalPunten = 0;
+			dealer.totaalPunten = 0; 
+			dealer.puntenDealer = 0;
+			dealer.kaartenDealer.clear();
 			System.out.println("spel start");
-			Kaartendek kaartendek = new Kaartendek();
+			Kaartendeck kaartendek = new Kaartendeck();
 			kaartendek.kaartendekMaken();
 			kaartendek.kaartenSchudden();
+			System.out.println("********************");
+			dealer.dealerPaktKaart();
+			dealer.puntenDealer = dealer.kaartenDealer.get(0).punten; 
+			System.out.println("*************************");
 			System.out.println("De eerste 2 kaarten: ");
 			dealer.geefKaart();
-			dealer.telPunten();
+			dealer.totaalPunten = dealer.telPunten();
 			dealer.geefKaart();
-			dealer.telPunten();
-			System.out.println("Totaal aantal punten: " + Dealer.totaalPunten);
+			dealer.totaalPunten = dealer.telPunten();
+			System.out.println("Totaal aantal punten: " + dealer.totaalPunten);
 			dealer.check21();
 			break;
 		case "k":
 			System.out.println("kaart");
 			dealer.geefKaart();
-			dealer.telPunten();
-			System.out.println("Totaal aantal punten: " + Dealer.totaalPunten);
+			dealer.totaalPunten = dealer.telPunten();
+			System.out.println("Totaal aantal punten: " + dealer.totaalPunten);
 			dealer.check21();
 			break;
 		case "p":
 			System.out.println("passen");
-			System.out.println("Totaal aantal punten: " + Dealer.totaalPunten);
+			System.out.println("Totaal aantal punten: " + dealer.totaalPunten);
+			System.out.println();
 			dealer.pas();
 			break;
 		case "q":

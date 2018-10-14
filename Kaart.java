@@ -3,7 +3,7 @@ package Weekopdrachten;
 public class Kaart {
 	String waarde;
 	String soort;
-	int puntenKaart;
+	int punten;
 	
 	Kaart(String soort, String waarde){
 			this.soort = soort;
@@ -13,13 +13,13 @@ public class Kaart {
 		
 	int waardeKaart() {
 		if (waarde == "boer" || waarde == "vrouw" ||waarde == "heer") {
-			puntenKaart = 10;
+			punten = 10;
 		} else if (waarde == "aas") {
-			puntenKaart = 11;
+			punten = 11;
 		} else {
-			puntenKaart = Integer.parseInt(waarde);
+			punten = Integer.parseInt(waarde);
 		}
-		return puntenKaart;
+		return punten;
 	}
 
 	@Override
